@@ -9,12 +9,14 @@ def AddData(filename, to_add):
         n = to_add.toBites()
 
         with open(filename, "wb") as file:
-            file.write(f + '\n'.encode() + b'0' * n)
+            file.write(f + '\n'.encode() + b'0' * n + '\n'.encode())
 
         return 0
 
     except PermissionError:
         return 1
+    except Exception:
+        print('err')
 
 class data:
     def __init__(self, type_fo_data, size):
@@ -64,7 +66,7 @@ while True:
         selectedFile = files[int(selectedFile)]
         break
 
-size = input(f"enter number of {words[typeOfData]} to add to {selectedFile}'\n>>>>")
+size = int(input(f"enter number of {words[typeOfData]} to add to {selectedFile}\n>>>>"))
 
 to_add = data(typeOfData, size)
 
@@ -72,5 +74,3 @@ if AddData(selectedFile, to_add) == 1:
     print("No permission")
 else:
     print('ok')
-
-
